@@ -1,0 +1,7 @@
+C:\Users\CRISTINA\Desktop\NewBookButler\NewBookButler\bin\Debug\NewBookButler.exe.config
+C:\Users\CRISTINA\Desktop\NewBookButler\NewBookButler\bin\Debug\NewBookButler.exe
+C:\Users\CRISTINA\Desktop\NewBookButler\NewBookButler\bin\Debug\NewBookButler.pdb
+C:\Users\CRISTINA\Desktop\NewBookButler\NewBookButler\obj\Debug\NewBookButler.csprojAssemblyReference.cache
+C:\Users\CRISTINA\Desktop\NewBookButler\NewBookButler\obj\Debug\NewBookButler.csproj.CoreCompileInputs.cache
+C:\Users\CRISTINA\Desktop\NewBookButler\NewBookButler\obj\Debug\NewBookButler.exe
+C:\Users\CRISTINA\Desktop\NewBookButler\NewBookButler\obj\Debug\NewBookButler.pdb
