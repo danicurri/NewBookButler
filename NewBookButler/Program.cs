@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 struct Book
 {
@@ -14,9 +15,12 @@ struct Book
 }
 class Program
 {
+    const int SIZE = 2000;
+
     static void Main(string[] args)
     {
-        Book[] books = new Book[2000];
+        
+        Book[] books = new Book[SIZE];
 
         Console.Write("     Libros (ficha actual:  )               ");
         Console.Write(DateTime.Now);
@@ -24,19 +28,21 @@ class Program
         Console.WriteLine();
         Console.WriteLine();
         Console.WriteLine();
-        Console.WriteLine("Title: ");
+        Console.WriteLine("Título: ");
         Console.WriteLine();
-        Console.WriteLine("Author: ");
+        Console.WriteLine("Autor: ");
         Console.WriteLine();
         Console.WriteLine("Editorial: ");
         Console.WriteLine();
-        Console.WriteLine("Pages: ");
+        Console.WriteLine("Páginas: ");
         Console.WriteLine();
-        Console.WriteLine("Category: ");
+        Console.WriteLine("Categoría: ");
         Console.WriteLine();
-        Console.WriteLine("Year: ");
+        Console.WriteLine("Año: ");
         Console.WriteLine();
-        Console.WriteLine("Comments: ");
+        Console.WriteLine("Ubicación");
+        Console.WriteLine();
+        Console.WriteLine("Observaciones: ");
         Console.WriteLine();
         Console.WriteLine();
         Console.WriteLine();
@@ -46,16 +52,16 @@ class Program
         int option;
         do
         {
-            Console.Write("1.Previous   ");
-            Console.Write("2.Next   ");
-            Console.Write("3.Number     ");
-            Console.Write("4.Search    ");
-            Console.Write("5.Add     ");
-            Console.WriteLine("6.Edit     ");
-            Console.Write("         7.Delete    ");
-            Console.Write("8-Lists    ");
-            Console.Write("9.Help   ");
-            Console.WriteLine("0-Exit");
+            Console.Write("1.Anterior   ");
+            Console.Write("2.Posterior   ");
+            Console.Write("3.Número     ");
+            Console.Write("4.Búsqueda    ");
+            Console.Write("5.Añadir     ");
+            Console.WriteLine("6.Modificar     ");
+            Console.Write("         7.Borrar    ");
+            Console.Write("8-Listados    ");
+            Console.Write("9.Ayuda   ");
+            Console.WriteLine("0-Terminar");
             Console.WriteLine();
             option = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine();
@@ -63,7 +69,7 @@ class Program
             switch (option)
             {
                 case 0:
-                    Console.WriteLine("Thank you for your time");
+                    Console.WriteLine("Hasta la próxima");
                     Console.WriteLine();
                     break;
 
@@ -105,7 +111,7 @@ class Program
                     break;
 
                 default:
-                    Console.WriteLine("Wrong option");
+                    Console.WriteLine("Opción errónea");
                     Console.WriteLine();
                     break;
             }
@@ -116,124 +122,108 @@ class Program
     //5. Add a book
     public static void Add(Book[] books)
     {
-        Book b;
         string title, author, editorial, category, location, comments;
-        int pages, year;
+        int pages, year, currentPos = 0;
 
-        do
+        if (currentPos >= SIZE)
         {
-            Console.WriteLine("Title: ");
+            Console.WriteLine("Base de datos llena");
+        }
+        else
+        {   
+            Console.WriteLine("Título: ");
             title = Console.ReadLine();
-            if (title == "")
-            {
-                Console.WriteLine("Do not leave title field empty");
-            }
-        } while (title == "");
 
-        b.title = title;
+            Pedir(title);
+            
+            books[currentPos].title = title;
 
-        do
-        {
-            Console.WriteLine("Author: ");
+            Console.WriteLine("Autor: ");
             author = Console.ReadLine();
-            if (author == "")
-            {
-                Console.WriteLine("Do not leave author field empty");
-            }
-        } while (author == "");
 
-        b.author = author;
+            Pedir(author);
 
-        do
-        {
+            books[currentPos].author = author;
+
             Console.WriteLine("Editorial: ");
             editorial = Console.ReadLine();
 
-            if (editorial == "")
-            {
-                Console.WriteLine("Do not leave editorial field empty");
-            }
-        } while (editorial == "");
+            Pedir(editorial);
 
-        b.editorial = editorial;
+            books[currentPos].editorial = editorial;
 
+            Console.WriteLine("Páginas: ");
+            string pagesHelper = Console.ReadLine();
 
-        string pagesHelper;
-        do
-        {
-            Console.WriteLine("Pages: ");
-            pagesHelper = Console.ReadLine();
+            Pedir(pagesHelper);
 
-            if (pagesHelper == "")
-            {
-                Console.WriteLine("Do not leave pages field empty");
-            }
-        } while (pagesHelper == "");
+            pages = Convert.ToInt32(pagesHelper);
 
-        pages = Convert.ToInt32(pagesHelper);
+            books[currentPos].pages = pages;
 
-        b.pages = pages;
-
-        do
-        {
-            Console.WriteLine("Category: ");
+            Console.WriteLine("Categoría: ");
             category = Console.ReadLine();
 
-            if (category == "")
-            {
-                Console.WriteLine("Do not leave category field empty");
-            }
-        } while (category == "");
+            Pedir(category);
 
-        b.category = category;
+            books[currentPos].category = category;
 
-        string yearHelper;
-        do
-        {
-            Console.WriteLine("Year: ");
-            yearHelper = Console.ReadLine();
+            Console.WriteLine("Año: ");
+            string  yearHelper = Console.ReadLine();
 
-            if (yearHelper == "")
-            {
-                Console.WriteLine("Do not leave year field empty");
-            }
-        } while (yearHelper == "");
+            Pedir(yearHelper);
 
-        year = Convert.ToInt32(yearHelper);
+            year = Convert.ToInt32(yearHelper);
 
-        b.year = year;
-
-        do
-        {
-            Console.WriteLine("Location: ");
+            books[currentPos].year = year;
+            
+            Console.WriteLine("Ubicación: ");
             location = Console.ReadLine();
 
-            if (location == "")
-            {
-                Console.WriteLine("Do not leave location field empty");
-            }
-        } while (location == "");
+            Pedir(location);
 
-        b.location = location;
+            books[currentPos].location = location;
 
-
-        do
-        {
-            Console.WriteLine("Comments: ");
+            Console.WriteLine("Observaciones: ");
             comments = Console.ReadLine();
 
-            if (comments == "")
-            {
-                Console.WriteLine("Do not leave comments field empty");
-            }
-        } while (comments == "");
+            Pedir(comments);
 
-        b.comments = comments;
+            books[currentPos].comments = comments;
 
-        for (int i = 0; i < books.Length; i++)
-        {
-            books[i] = b;
+            Guardar(title, author, editorial, pages,
+                    category, year, location, comments);
         }
+
+        currentPos++;
+
+    }
+
+    public static void Pedir(string cadena)
+    {
+        do
+        {
+            if (cadena == "")
+            {
+                Console.WriteLine("No deje el campo vacío");
+            }
+        } while (cadena == "");
+    }
+
+    public static void Guardar(string titulo, string autor, string editorial,
+                                int paginas, string categoria, int anyo,
+                                string ubicacion, string observaciones)
+    {
+        StreamWriter ficheroEscritura;
+
+        string nombreFichero = "LibrosBD.txt";
+
+        ficheroEscritura = File.AppendText(nombreFichero);
+        ficheroEscritura.Write(DateTime.Now + " - ");
+        ficheroEscritura.WriteLine(titulo, autor, editorial, paginas, categoria, anyo,
+                                ubicacion, observaciones + " ");
+
+        ficheroEscritura.Close();
     }
 }
 
