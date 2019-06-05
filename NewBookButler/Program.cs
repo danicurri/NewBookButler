@@ -15,40 +15,23 @@ struct Book
 }
 class Program
 {
-    const int SIZE = 2000;
+    const int SIZE = 10;
 
     static void Main(string[] args)
     {
         
         Book[] books = new Book[SIZE];
+        string nombreFichero = "LibrosBD.txt";
 
-        Console.Write("     Libros (ficha actual:  )               ");
-        Console.Write(DateTime.Now);
-        Console.WriteLine("             Daniel Contreras");
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine("Título: ");
-        Console.WriteLine();
-        Console.WriteLine("Autor: ");
-        Console.WriteLine();
-        Console.WriteLine("Editorial: ");
-        Console.WriteLine();
-        Console.WriteLine("Páginas: ");
-        Console.WriteLine();
-        Console.WriteLine("Categoría: ");
-        Console.WriteLine();
-        Console.WriteLine("Año: ");
-        Console.WriteLine();
-        Console.WriteLine("Ubicación");
-        Console.WriteLine();
-        Console.WriteLine("Observaciones: ");
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine();
-
+        if (!File.Exists(nombreFichero))
+        {
+            Console.WriteLine("No existe el fichero");
+        }
+        else
+        {
+            Cargar(nombreFichero);
+        }
+        
         int option;
         do
         {
@@ -117,6 +100,8 @@ class Program
             }
             
         } while (option != 0);
+
+        Guardar("LibrosBD.txt", books);
     }
 
     //5. Add a book
@@ -135,22 +120,16 @@ class Program
             title = Console.ReadLine();
 
             Pedir(title);
-            
-            books[currentPos].title = title;
 
             Console.WriteLine("Autor: ");
             author = Console.ReadLine();
 
             Pedir(author);
 
-            books[currentPos].author = author;
-
             Console.WriteLine("Editorial: ");
             editorial = Console.ReadLine();
 
             Pedir(editorial);
-
-            books[currentPos].editorial = editorial;
 
             Console.WriteLine("Páginas: ");
             string pagesHelper = Console.ReadLine();
@@ -159,14 +138,10 @@ class Program
 
             pages = Convert.ToInt32(pagesHelper);
 
-            books[currentPos].pages = pages;
-
             Console.WriteLine("Categoría: ");
             category = Console.ReadLine();
 
             Pedir(category);
-
-            books[currentPos].category = category;
 
             Console.WriteLine("Año: ");
             string  yearHelper = Console.ReadLine();
@@ -174,29 +149,29 @@ class Program
             Pedir(yearHelper);
 
             year = Convert.ToInt32(yearHelper);
-
-            books[currentPos].year = year;
             
             Console.WriteLine("Ubicación: ");
             location = Console.ReadLine();
 
             Pedir(location);
 
-            books[currentPos].location = location;
-
             Console.WriteLine("Observaciones: ");
             comments = Console.ReadLine();
 
             Pedir(comments);
 
+            books[currentPos].title = title;
+            books[currentPos].author = author;
+            books[currentPos].editorial = editorial;
+            books[currentPos].pages = pages;
+            books[currentPos].category = category;
+            books[currentPos].year = year;
+            books[currentPos].location = location;
             books[currentPos].comments = comments;
-
-            Guardar(title, author, editorial, pages,
-                    category, year, location, comments);
+            
         }
 
         currentPos++;
-
     }
 
     public static void Pedir(string cadena)
@@ -210,20 +185,55 @@ class Program
         } while (cadena == "");
     }
 
-    public static void Guardar(string titulo, string autor, string editorial,
-                                int paginas, string categoria, int anyo,
-                                string ubicacion, string observaciones)
+    public static void Guardar(string nombreFichero, Book[] books)
     {
         StreamWriter ficheroEscritura;
-
-        string nombreFichero = "LibrosBD.txt";
-
-        ficheroEscritura = File.AppendText(nombreFichero);
-        ficheroEscritura.Write(DateTime.Now + " - ");
-        ficheroEscritura.WriteLine(titulo, autor, editorial, paginas, categoria, anyo,
-                                ubicacion, observaciones + " ");
+        
+        ficheroEscritura =  File.AppendText(nombreFichero);
+        ficheroEscritura.WriteLine("    Libros (ficha actual:  )     " + DateTime.Now + "      Daniel Contreras 2019");
+        ficheroEscritura.WriteLine(" ");
+        ficheroEscritura.WriteLine(" ");
+        for (int i = 0; i < books.Length; i++)
+        {
+            ficheroEscritura.WriteLine("Título:     " + books[i].title);
+            ficheroEscritura.WriteLine(" ");
+            ficheroEscritura.WriteLine("Autor:      " + books[i].author);
+            ficheroEscritura.WriteLine(" ");
+            ficheroEscritura.WriteLine("Editorial:  " + books[i].editorial);
+            ficheroEscritura.WriteLine("Páginas:    " + books[i].pages);
+            ficheroEscritura.WriteLine("Categoría:  " + books[i].category);
+            ficheroEscritura.WriteLine("Año:        " + books[i].year);
+            ficheroEscritura.WriteLine("Ubicación:  " + books[i].location);
+            ficheroEscritura.WriteLine(" ");
+            ficheroEscritura.WriteLine("Observaciones: " + books[i].comments);
+            ficheroEscritura.WriteLine("-----------------------------------");
+        }
 
         ficheroEscritura.Close();
+    }
+
+    public static Book[] Cargar(string nombreFichero)
+    {
+        StreamReader ficheroLectura = new StreamReader(nombreFichero);
+
+        Book[] books = new Book[SIZE];
+        string linea;
+        int contador = 0;
+        do
+        {
+            linea = ficheroLectura.ReadLine();
+            if (linea != null)
+            {
+                Console.WriteLine(linea);
+                contador++;
+            }
+        } while (linea != null);
+
+        //Console.WriteLine("Lineas: " + contador);
+
+        ficheroLectura.Close();
+
+        return books;
     }
 }
 
