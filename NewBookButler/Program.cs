@@ -13,6 +13,7 @@ struct Book
     public string location;
     public string comments;
 }
+
 class Program
 {
     const int SIZE = 10;
@@ -53,6 +54,7 @@ class Program
             {
                 case 0:
                     Console.WriteLine("Hasta la próxima");
+                    Guardar("LibrosBD.txt", books);
                     Console.WriteLine();
                     break;
 
@@ -101,21 +103,25 @@ class Program
             
         } while (option != 0);
 
-        Guardar("LibrosBD.txt", books);
     }
 
     //5. Add a book
     public static void Add(Book[] books)
     {
         string title, author, editorial, category, location, comments;
-        int pages, year, currentPos = 0;
+        int pages, year;
+        int currentPos = 0;
 
         if (currentPos >= SIZE)
         {
             Console.WriteLine("Base de datos llena");
         }
         else
-        {   
+        {
+
+            Console.WriteLine("Libros (ficha actual: " + currentPos + 1 + ")     "
+                                        + DateTime.Now + "       Daniel Contreras 2019");
+
             Console.WriteLine("Título: ");
             title = Console.ReadLine();
 
@@ -168,10 +174,11 @@ class Program
             books[currentPos].year = year;
             books[currentPos].location = location;
             books[currentPos].comments = comments;
-            
+
         }
 
         currentPos++;
+        Console.WriteLine("Current:" + currentPos);
     }
 
     public static void Pedir(string cadena)
@@ -188,28 +195,25 @@ class Program
     public static void Guardar(string nombreFichero, Book[] books)
     {
         StreamWriter ficheroEscritura;
+        int currentPos = 0;
         
         ficheroEscritura =  File.AppendText(nombreFichero);
-        ficheroEscritura.WriteLine("    Libros (ficha actual:  )     " + DateTime.Now + "      Daniel Contreras 2019");
-        ficheroEscritura.WriteLine(" ");
-        ficheroEscritura.WriteLine(" ");
-        for (int i = 0; i < books.Length; i++)
-        {
-            ficheroEscritura.WriteLine("Título:     " + books[i].title);
-            ficheroEscritura.WriteLine(" ");
-            ficheroEscritura.WriteLine("Autor:      " + books[i].author);
-            ficheroEscritura.WriteLine(" ");
-            ficheroEscritura.WriteLine("Editorial:  " + books[i].editorial);
-            ficheroEscritura.WriteLine("Páginas:    " + books[i].pages);
-            ficheroEscritura.WriteLine("Categoría:  " + books[i].category);
-            ficheroEscritura.WriteLine("Año:        " + books[i].year);
-            ficheroEscritura.WriteLine("Ubicación:  " + books[i].location);
-            ficheroEscritura.WriteLine(" ");
-            ficheroEscritura.WriteLine("Observaciones: " + books[i].comments);
-            ficheroEscritura.WriteLine("-----------------------------------");
-        }
+        ficheroEscritura.WriteLine("Libros (ficha actual: " + currentPos+1  + ") " 
+                                    + DateTime.Now + " Daniel Contreras 2019");
+        ficheroEscritura.WriteLine("Título:     " + books[currentPos].title);
+        ficheroEscritura.WriteLine("Autor:      " + books[currentPos].author);;
+        ficheroEscritura.WriteLine("Editorial:  " + books[currentPos].editorial);
+        ficheroEscritura.WriteLine("Páginas:    " + books[currentPos].pages);
+        ficheroEscritura.WriteLine("Categoría:  " + books[currentPos].category);
+        ficheroEscritura.WriteLine("Año:        " + books[currentPos].year);
+        ficheroEscritura.WriteLine("Ubicación:  " + books[currentPos].location);
+        ficheroEscritura.WriteLine("Observaciones: " + books[currentPos].comments);
+        ficheroEscritura.WriteLine("-----------------------------------");
+
+        currentPos++;
 
         ficheroEscritura.Close();
+
     }
 
     public static Book[] Cargar(string nombreFichero)
@@ -219,6 +223,7 @@ class Program
         Book[] books = new Book[SIZE];
         string linea;
         int contador = 0;
+
         do
         {
             linea = ficheroLectura.ReadLine();
@@ -229,7 +234,7 @@ class Program
             }
         } while (linea != null);
 
-        //Console.WriteLine("Lineas: " + contador);
+        Console.WriteLine("Lineas: " + contador);
 
         ficheroLectura.Close();
 
