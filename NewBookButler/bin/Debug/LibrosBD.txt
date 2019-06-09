@@ -1,175 +1,20 @@
-﻿    Libros (ficha actual: 01)    08/06/2019 21:42:19      Daniel Contreras 2019
- 
- 
-Título:     a
- 
-Autor:      a
- 
-Editorial:  a
-Páginas:    1
-Categoría:  a
-Año:        1
-Ubicación:  a
- 
-Observaciones: a
------------------------------------
-    Libros (ficha actual: 01)    08/06/2019 21:42:59      Daniel Contreras 2019
- 
- 
-Título:     q
- 
-Autor:      q
- 
-Editorial:  q
-Páginas:    1
-Categoría:  q
-Año:        1
-Ubicación:  q
- 
-Observaciones: q
------------------------------------
-    Libros (ficha actual: 01)    08/06/2019 21:47:55      Daniel Contreras 2019
- 
- 
-Título:     
- 
-Autor:      
- 
-Editorial:  
-Páginas:    0
-Categoría:  
-Año:        0
-Ubicación:  
- 
-Observaciones: 
------------------------------------
-    Libros (ficha actual: 01)    08/06/2019 21:48:06      Daniel Contreras 2019
- 
- 
-Título:     
- 
-Autor:      
- 
-Editorial:  
-Páginas:    0
-Categoría:  
-Año:        0
-Ubicación:  
- 
-Observaciones: 
------------------------------------
-    Libros (ficha actual: 01)    08/06/2019 21:49:24      Daniel Contreras 2019
- 
- 
-Título:     w
- 
-Autor:      w
- 
-Editorial:  w
-Páginas:    1
-Categoría:  w
-Año:        1
-Ubicación:  w
- 
-Observaciones: w
------------------------------------
-    Libros (ficha actual: 01)    08/06/2019 21:56:58      Daniel Contreras 2019
- 
- 
-Título:     e
- 
-Autor:      e
- 
-Editorial:  e
-Páginas:    1
-Categoría:  w
-Año:        1
-Ubicación:  e
- 
+Libro 1:
+Título: Quijote
+Autor: Cervantes
+Editorial: Desconocida
+Páginas: 666
+Categoría: Aventuras
+Año: 1666
+Ubicación: cew
+Observaciones: de
+-----------------------------------------
+Libro 2:
+Título: e
+Autor: e
+Editorial: e
+Páginas: 2
+Categoría: e
+Año: 2
+Ubicación: e
 Observaciones: e
------------------------------------
-    Libros (ficha actual: 01)    08/06/2019 22:05:29      Daniel Contreras 2019
- 
- 
-Título:     
- 
-Autor:      
- 
-Editorial:  
-Páginas:    0
-Categoría:  
-Año:        0
-Ubicación:  
- 
-Observaciones: 
------------------------------------
-    Libros (ficha actual: 01)    08/06/2019 22:06:00      Daniel Contreras 2019
- 
- 
-Título:     t
- 
-Autor:      t
- 
-Editorial:  t
-Páginas:    3
-Categoría:  r
-Año:        3
-Ubicación:  r
- 
-Observaciones: r
------------------------------------
-    Libros (ficha actual: 01)    08/06/2019 22:06:15      Daniel Contreras 2019
- 
- 
-Título:     
- 
-Autor:      
- 
-Editorial:  
-Páginas:    0
-Categoría:  
-Año:        0
-Ubicación:  
- 
-Observaciones: 
------------------------------------
-Libros (ficha actual: 01) 08/06/2019 22:19:32 Daniel Contreras 2019
-Título:     r
-Autor:      r
-Editorial:  r
-Páginas:    3
-Categoría:  r
-Año:        3
-Ubicación:  r
-Observaciones: r
------------------------------------
-Libros (ficha actual: 01) 08/06/2019 22:19:48 Daniel Contreras 2019
-Título:     
-Autor:      
-Editorial:  
-Páginas:    0
-Categoría:  
-Año:        0
-Ubicación:  
-Observaciones: 
------------------------------------
-Libros (ficha actual: 01) 08/06/2019 22:20:46 Daniel Contreras 2019
-Título:     w
-Autor:      w
-Editorial:  w
-Páginas:    2
-Categoría:  w
-Año:        2
-Ubicación:  w
-Observaciones: w
------------------------------------
-Libros (ficha actual: 01) 08/06/2019 22:34:52 Daniel Contreras 2019
-Título:     
-Autor:      
-Editorial:  
-Páginas:    0
-Categoría:  
-Año:        0
-Ubicación:  
-Observaciones: 
------------------------------------
+-----------------------------------------
