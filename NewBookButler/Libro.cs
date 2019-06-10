@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 class Libro
 {
-    protected string titulo;
-    protected string autor;
-    protected string editorial;
-    protected int paginas;
-    protected string categoria;
-    protected int anyo;
-    protected string ubicacion;
-    protected string observaciones;
-    protected string codigo;
+    public string titulo;
+    public string autor;
+    public string editorial;
+    public int paginas;
+    public string categoria;
+    public int anyo;
+    public string ubicacion;
+    public string observaciones;
+    public string codigo;
 
     public Libro(string titulo, string autor, string editorial, int paginas, 
                 string categoria, int anyo, string ubicacion, string observaciones,
