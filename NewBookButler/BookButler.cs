@@ -1,39 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
-/*
-struct Libro
-{
-    public string titulo;
-    public string autor;
-    public string editorial;
-    public int paginas;
-    public string categoria;
-    public int anyo;
-    public string ubicacion;
-    public string observaciones;
-}
-*/
+
 class BookButler
 {
-    const int SIZE = 10;
-
     static void Main(string[] args)
     {
 
-        Libro[] libros = new Libro[SIZE];
+        ListaDeLibros libros = new ListaDeLibros();
         int posActual = 0;
         int numeroDeLibroAMostrar = 0;
-        string nombreFichero = "LibrosBD.txt";
 
-        if (!File.Exists(nombreFichero))
-        {
-            Console.WriteLine("No existe el fichero");
-        }
-        else
-        {
-            Cargar(nombreFichero, libros, ref posActual);
-        }
 
         int opcion;
         do
@@ -61,7 +38,6 @@ class BookButler
             {
                 case 0:
                     Console.WriteLine("Hasta la próxima");
-                    Guardar("LibrosBD.txt", libros, posActual);
                     Console.WriteLine();
                     break;
 
@@ -117,58 +93,47 @@ class BookButler
     }
 
     //5. Add a book
-    public static void Anyadir(Libro[] libros, ref int posActual)
+    public static void Anyadir(ListaDeLibros libros, ref int posActual)
     {
-        string titulo, autor, editorial, categoria, ubicacion, observaciones;
+        string titulo, autor, editorial, categoria, ubicacion, 
+            observaciones, codigo;
         int paginas, anyo;
 
-        if (posActual >= SIZE)
-        {
-            Console.WriteLine("Base de datos llena");
-        }
-        else
-        {
-            //  función "Pedir y devolver"
-            titulo = PedirYDevolver("Título: ");
-            autor = PedirYDevolver("Autor: ");
-            editorial = PedirYDevolver("Editorial: ");
-            paginas =  Convert.ToInt32(PedirYDevolver("Páginas: "));
-            categoria = PedirYDevolver("Categoría: ");
-            anyo = Convert.ToInt32(PedirYDevolver("Año: "));
-            ubicacion = PedirYDevolver("Ubicación: ");
-            observaciones = PedirYDevolver("Observaciones: ");
-
-            libros[posActual].titulo = titulo;
-            libros[posActual].autor = autor;
-            libros[posActual].editorial = editorial;
-            libros[posActual].paginas = paginas;
-            libros[posActual].categoria = categoria;
-            libros[posActual].anyo = anyo;
-            libros[posActual].ubicacion = ubicacion;
-            libros[posActual].observaciones = observaciones;
-
-        }
+        //  función "Pedir y devolver"
+        codigo = PedirYDevolver("Código: ");
+        titulo = PedirYDevolver("Título: ");
+        autor = PedirYDevolver("Autor: ");
+        editorial = PedirYDevolver("Editorial: ");
+        paginas =  Convert.ToInt32(PedirYDevolver("Páginas: "));
+        categoria = PedirYDevolver("Categoría: ");
+        anyo = Convert.ToInt32(PedirYDevolver("Año: "));
+        ubicacion = PedirYDevolver("Ubicación: ");
+        observaciones = PedirYDevolver("Observaciones: ");
+        
+        libros.Incluir( new Libro ( titulo,  autor, editorial, 
+                    paginas, categoria, anyo, ubicacion, observaciones,
+                    codigo));
 
         posActual++;
-        Console.WriteLine(
-            );
+        Console.WriteLine();
         Console.WriteLine("Posicion actual:" + posActual);
     }
 
 
     // muestra libro
-    public static void Mostrar(Libro[] libros, int posActual, int numeroDeLibro)
+    public static void Mostrar(ListaDeLibros libros, 
+        int posActual, int numeroDeLibro)
     {
-        if (numeroDeLibro < posActual)
+        if (numeroDeLibro < libros.Cantidad)
         {
-            Console.WriteLine(libros[numeroDeLibro].titulo);
-            Console.WriteLine(libros[numeroDeLibro].autor);
-            Console.WriteLine(libros[numeroDeLibro].editorial);
-            Console.WriteLine(libros[numeroDeLibro].paginas);
-            Console.WriteLine(libros[numeroDeLibro].categoria);
-            Console.WriteLine(libros[numeroDeLibro].anyo);
-            Console.WriteLine(libros[numeroDeLibro].ubicacion);
-            Console.WriteLine(libros[numeroDeLibro].observaciones);
+            Console.WriteLine(libros.Get(numeroDeLibro).titulo);
+            Console.WriteLine(libros.Get(numeroDeLibro).autor);
+            Console.WriteLine(libros.Get(numeroDeLibro).editorial);
+            Console.WriteLine(libros.Get(numeroDeLibro).paginas);
+            Console.WriteLine(libros.Get(numeroDeLibro).categoria);
+            Console.WriteLine(libros.Get(numeroDeLibro).anyo);
+            Console.WriteLine(libros.Get(numeroDeLibro).ubicacion);
+            Console.WriteLine(libros.Get(numeroDeLibro).observaciones);
             Console.WriteLine();
         }
     }
@@ -190,71 +155,4 @@ class BookButler
         return respuesta;
     }
 
-
-    public static void Guardar(string nombreFichero, Libro[] libros, int cantidad)
-    {
-        StreamWriter ficheroEscritura;
-        try
-        {
-            ficheroEscritura = File.CreateText(nombreFichero);
-            //ficheroEscritura.WriteLine(cantidad);
-            for (int i = 0; i < cantidad; i++)
-            {
-                ficheroEscritura.WriteLine("Libro " + (i + 1) + ":");
-                ficheroEscritura.WriteLine("Título: " + libros[i].titulo);
-                ficheroEscritura.WriteLine("Autor: " + libros[i].autor); ;
-                ficheroEscritura.WriteLine("Editorial: " + libros[i].editorial);
-                ficheroEscritura.WriteLine("Páginas: " + libros[i].paginas);
-                ficheroEscritura.WriteLine("Categoría: " + libros[i].categoria);
-                ficheroEscritura.WriteLine("Año: " + libros[i].anyo);
-                ficheroEscritura.WriteLine("Ubicación: " + libros[i].ubicacion);
-                ficheroEscritura.WriteLine("Observaciones: " + libros[i].observaciones);
-                ficheroEscritura.WriteLine("-----------------------------------------");
-            }
-            ficheroEscritura.Close();
-        }
-        catch (IOException e)
-        {
-            Console.WriteLine("No se ha podido escribir!");
-            Console.WriteLine("El error exacto es: {0}", e.Message);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("Problema general(fichero escritura): " + e.Message);
-        }
-    }
-
-
-    public static void Cargar(string nombreFichero, Libro[] libros, ref int cantidad)
-    {
-        StreamReader ficheroLectura = new StreamReader(nombreFichero);
-
-        try
-        {
-
-            cantidad = Convert.ToInt32(ficheroLectura.ReadLine());
-            for (int i = 0; i < cantidad; i++)
-            {
-                libros[i].titulo = ficheroLectura.ReadLine();
-                libros[i].autor = ficheroLectura.ReadLine();
-                libros[i].editorial = ficheroLectura.ReadLine();
-                libros[i].paginas = Convert.ToInt32(ficheroLectura.ReadLine());
-                libros[i].categoria = ficheroLectura.ReadLine();
-                libros[i].anyo = Convert.ToInt32(ficheroLectura.ReadLine());
-                libros[i].ubicacion = ficheroLectura.ReadLine();
-                libros[i].observaciones = ficheroLectura.ReadLine();
-
-            }
-            ficheroLectura.Close();
-        }
-        catch (IOException e)
-        {
-            Console.WriteLine("No se ha podido escribir!");
-            Console.WriteLine("El error exacto es: {0}", e.Message);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("Problema general(fichero lectura): " + e.Message);
-        }
-    }
 }
