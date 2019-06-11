@@ -4,47 +4,55 @@ using System.IO;
 
 class ListaDeLibros
 {
-    List<Libro> libros = new List<Libro>();
+    List<Libro> libros;
     string nombreFichero = "LibrosBD.txt";
 
-    public int cantidad { get { return libros.Count; } }
+    public int Cantidad { get { return libros.Count; } }
 
     public ListaDeLibros()
     {
-        Cargar(nombreFichero, libros, cantidad);
+        libros = new List<Libro>();
+        Cargar(nombreFichero);
     }
 
     public Libro Get(int posicion)
     {
-       Libro libro = libros[posicion - 1];
-       return libro;
+        Libro libro = libros[posicion];
+        return libro;
     }
-    
+
     public void Incluir(Libro libro)
     {
         libros.Add(libro);
-        Guardar(nombreFichero, libros, cantidad);
+        Guardar(nombreFichero);
     }
 
 
-    private static void Cargar(string nombreFichero, List<Libro> libros, int cantidad)
+    private void Cargar(string nombreFichero)
     {
-        StreamReader ficheroLectura = new StreamReader(nombreFichero);
+        if (!File.Exists(nombreFichero))
+            return;
 
         try
         {
+            StreamReader ficheroLectura = new StreamReader(nombreFichero);
 
-            cantidad = Convert.ToInt32(ficheroLectura.ReadLine());
+            int cantidad = Convert.ToInt32(ficheroLectura.ReadLine());
             for (int i = 0; i < cantidad; i++)
             {
-                libros[i].titulo = ficheroLectura.ReadLine();
-                libros[i].autor = ficheroLectura.ReadLine();
-                libros[i].editorial = ficheroLectura.ReadLine();
-                libros[i].paginas = Convert.ToInt32(ficheroLectura.ReadLine());
-                libros[i].categoria = ficheroLectura.ReadLine();
-                libros[i].anyo = Convert.ToInt32(ficheroLectura.ReadLine());
-                libros[i].ubicacion = ficheroLectura.ReadLine();
-                libros[i].observaciones = ficheroLectura.ReadLine();
+                string titulo = ficheroLectura.ReadLine();
+                string autor = ficheroLectura.ReadLine();
+                string editorial = ficheroLectura.ReadLine();
+                int paginas = Convert.ToInt32(ficheroLectura.ReadLine());
+                string categoria = ficheroLectura.ReadLine();
+                int anyo = Convert.ToInt32(ficheroLectura.ReadLine());
+                string ubicacion = ficheroLectura.ReadLine();
+                string observaciones = ficheroLectura.ReadLine();
+                string codigo = ficheroLectura.ReadLine();
+
+                libros.Add(new Libro(titulo, autor, editorial,
+                    paginas, categoria, anyo, ubicacion, observaciones,
+                    codigo));
 
             }
             ficheroLectura.Close();
@@ -61,25 +69,24 @@ class ListaDeLibros
     }
 
 
-    private static void Guardar(string nombreFichero, List<Libro> libros, int cantidad)
+    private void Guardar(string nombreFichero)
     {
         StreamWriter ficheroEscritura;
         try
         {
             ficheroEscritura = File.CreateText(nombreFichero);
-            //ficheroEscritura.WriteLine(cantidad);
-            for (int i = 0; i < cantidad; i++)
+            ficheroEscritura.WriteLine(libros.Count);
+            for (int i = 0; i < Cantidad; i++)
             {
-                ficheroEscritura.WriteLine("Libro " + (i + 1) + ":");
-                ficheroEscritura.WriteLine("Título: " + libros[i].titulo);
-                ficheroEscritura.WriteLine("Autor: " + libros[i].autor); ;
-                ficheroEscritura.WriteLine("Editorial: " + libros[i].editorial);
-                ficheroEscritura.WriteLine("Páginas: " + libros[i].paginas);
-                ficheroEscritura.WriteLine("Categoría: " + libros[i].categoria);
-                ficheroEscritura.WriteLine("Año: " + libros[i].anyo);
-                ficheroEscritura.WriteLine("Ubicación: " + libros[i].ubicacion);
-                ficheroEscritura.WriteLine("Observaciones: " + libros[i].observaciones);
-                ficheroEscritura.WriteLine("-----------------------------------------");
+                ficheroEscritura.WriteLine(libros[i].titulo);
+                ficheroEscritura.WriteLine(libros[i].autor); ;
+                ficheroEscritura.WriteLine(libros[i].editorial);
+                ficheroEscritura.WriteLine(libros[i].paginas);
+                ficheroEscritura.WriteLine(libros[i].categoria);
+                ficheroEscritura.WriteLine(libros[i].anyo);
+                ficheroEscritura.WriteLine(libros[i].ubicacion);
+                ficheroEscritura.WriteLine(libros[i].observaciones);
+                ficheroEscritura.WriteLine(libros[i].codigo);
             }
             ficheroEscritura.Close();
         }
@@ -94,6 +101,3 @@ class ListaDeLibros
         }
     }
 }
-
-
-
