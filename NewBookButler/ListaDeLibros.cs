@@ -59,7 +59,7 @@ class ListaDeLibros
         }
         catch (IOException e)
         {
-            Console.WriteLine("No se ha podido escribir!");
+            Console.WriteLine("No se ha podido leer!");
             Console.WriteLine("El error exacto es: {0}", e.Message);
         }
         catch (Exception e)

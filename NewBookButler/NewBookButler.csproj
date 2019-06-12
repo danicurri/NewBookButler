@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Biblioteca.cs" />
-    <Compile Include="BookButler.cs" />
+    <Compile Include="ConsolaMejorada.cs" />
     <Compile Include="GestionDeLibros.cs" />
     <Compile Include="GestionDePrestamos.cs" />
     <Compile Include="GestionDeUsuarios.cs" />
