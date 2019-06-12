@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 class Biblioteca
@@ -9,13 +9,16 @@ class Biblioteca
 
         do
         {
-            Console.WriteLine("1. Gestión de libros");
-            Console.WriteLine("2. Gestión de usuarios");
-            Console.WriteLine("3. Gestión de préstamos");
-            Console.WriteLine("0. Salir");
+            ConsolaMejorada.DibujarVentana(20, 8, 40, 8, "blue");
+            ConsolaMejorada.Escribir(22, 10, "1. Gestión de libros", "yellow");
+            ConsolaMejorada.Escribir(22, 11, "2. Gestión de usuarios", "yellow");
+            ConsolaMejorada.Escribir(22, 12, "3. Gestión de préstamos", "yellow");
+            ConsolaMejorada.EscribirCentrado(13, "0. Salir", "yellow");
+            
             opcion = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine();
+            // opcion = ConsolaMejorada.PedirEnteroEntreDosValores(0, 3);
 
+            Console.WriteLine();
             switch (opcion)
             {
                 case 1:
